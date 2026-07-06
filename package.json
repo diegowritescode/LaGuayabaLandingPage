@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "Sitio web oficial de La Guayaba Restaurante - Bar. Comida típica colombiana en Medellín desde 1999.",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
