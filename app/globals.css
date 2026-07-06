@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+/* ============================================================
+   La Guayaba — Sistema de diseño (Tailwind CSS v4)
+   Los tokens de @theme generan utilidades: bg-cream, text-brown,
+   font-serif, etc. Cambiar aquí actualiza toda la marca.
+   ============================================================ */
+@theme {
+  /* Marca */
+  --color-guayaba: #e79a9c;
+  --color-guayaba-dark: #d07e80;
+  /* Rosa profundo para TEXTO/acentos sobre fondos claros: cumple contraste
+     AA (>=4.5:1 sobre crema), a diferencia del rosa base que es decorativo. */
+  --color-guayaba-deep: #a84f5a;
+  --color-guayaba-light: #f3c7c7;
+
+  --color-brown: #4a2d27;
+  --color-brown-soft: #5c3a32;
+  --color-wood: #6e4b3b;
+
+  --color-leaf: #5d8f44;
+  --color-forest: #37673a;
+  --color-forest-deep: #2b5330;
+
+  --color-cream: #fdf9f5;
+  --color-cream-deep: #f7f0e9;
+  --color-sand: #efe8e4;
+
+  /* Tipografía (las variables las inyecta next/font en el layout) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+
+  /* Sombras cálidas */
+  --shadow-soft: 0 10px 40px -12px rgba(74, 45, 39, 0.18);
+  --shadow-card: 0 24px 60px -24px rgba(74, 45, 39, 0.28);
+
+  /* Curvas de easing */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ------------------------------------------------------------
+   Base — en @layer base para que las utilidades de Tailwind
+   (text-cream, text-white, etc.) siempre puedan sobreescribir.
+   ------------------------------------------------------------ */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Compensa el navbar fijo al saltar a los anclajes. */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-brown);
+    font-family: var(--font-sans);
+    /* Evita cualquier overflow horizontal en todos los breakpoints.
+       `clip` recorta sin crear un contexto de scroll, así no rompe
+       `position: sticky` (a diferencia de `hidden`). */
+    overflow-x: hidden;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-guayaba);
+    color: #fff;
+  }
+
+  /* Foco accesible y consistente con la marca. */
+  :focus-visible {
+    outline: 2px solid var(--color-forest);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Los títulos usan la serif por defecto y heredan el color del contexto. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: inherit;
+    text-wrap: balance;
+  }
+
+  /* Barra de desplazamiento discreta y cálida (navegadores WebKit). */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-cream-deep);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-guayaba-light);
+    border: 3px solid var(--color-cream-deep);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-guayaba);
+  }
+}
+
+/* ------------------------------------------------------------
+   Utilidades de marca
+   ------------------------------------------------------------ */
+@layer utilities {
+  /* Antetítulo en versalitas con línea decorativa. */
+  .eyebrow {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  /* Degradado cálido para acentos de texto. */
+  .text-gradient-guayaba {
+    background: linear-gradient(
+      100deg,
+      var(--color-guayaba-deep),
+      var(--color-guayaba)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Palabra de acento en cursiva serif (toque editorial). */
+  .accent {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* Titular display: serif, muy apretado y con equilibrio óptico. */
+  .font-display {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  /* Textura sutil de puntos para fondos cálidos. */
+  .bg-dots {
+    background-image: radial-gradient(
+      rgba(110, 75, 59, 0.09) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+
+  /* Línea fina decorativa. */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      currentColor,
+      transparent
+    );
+    opacity: 0.4;
+  }
+
+  /* Marquee infinito (el contenido se duplica en el componente). */
+  .animate-marquee {
+    animation: marquee 32s linear infinite;
+  }
+  .marquee-pause:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Zoom lento tipo Ken Burns para fotos de fondo. */
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-kenburns {
+    animation: kenburns 20s ease-in-out infinite alternate;
+  }
+}
+
+/* ------------------------------------------------------------
+   Grano de película — capa fija y sutil que da textura artesanal
+   a todo el sitio (por encima del contenido, nunca bloquea clics).
+   ------------------------------------------------------------ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ------------------------------------------------------------
+   Accesibilidad: respeta la preferencia de menos movimiento.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
