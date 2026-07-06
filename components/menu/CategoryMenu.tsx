@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, Search, X, Star, Leaf, SearchX } from "lucide-react";
 import type { MenuCategory, Dish, MenuPrice } from "@/lib/menu";
@@ -10,13 +11,7 @@ import { cn, normalizeText } from "@/lib/utils";
 import { LeafMark } from "@/components/ui/LeafMark";
 import { GardenDecor, PalmFrond } from "@/components/ui/Botanical";
 
-export function CategoryMenu({
-  category,
-  onBack,
-}: {
-  category: MenuCategory;
-  onBack: () => void;
-}) {
+export function CategoryMenu({ category }: { category: MenuCategory }) {
   const [query, setQuery] = useState("");
   const [activeSub, setActiveSub] = useState(category.subcategories[0]?.id ?? "");
   const barRef = useRef<HTMLDivElement>(null);
@@ -70,7 +65,6 @@ export function CategoryMenu({
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className="bg-cream text-brown"
     >
@@ -94,17 +88,21 @@ export function CategoryMenu({
           </div>
         </div>
         <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-5 text-center sm:px-8">
-          <button
-            type="button"
-            onClick={onBack}
+          <Link
+            href="/menu"
             className="inline-flex items-center gap-2 rounded-full border border-cream/25 px-4 py-2 text-sm font-medium text-cream/85 transition-all duration-300 hover:-translate-y-0.5 hover:border-cream/45 hover:text-cream"
           >
             <ArrowLeft className="h-4 w-4" />
             Todas las categorías
-          </button>
+          </Link>
           <h1 className="font-display mt-5 text-4xl text-cream sm:text-5xl lg:text-6xl">
             {category.label}
           </h1>
+          {category.intro && (
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-cream/75 sm:text-base">
+              {category.intro}
+            </p>
+          )}
           <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-cream/70">
             <span className="inline-flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 fill-guayaba-light text-guayaba-light" /> Insignia de la casa

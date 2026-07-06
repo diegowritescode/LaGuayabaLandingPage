@@ -28,16 +28,18 @@ export function Hero() {
   const contentY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 110]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
 
+  // Tiempos cortos y arranque temprano: el hero es el LCP, así que el texto
+  // debe pintarse cuanto antes sin perder el revelado editorial.
   const container: Variants = {
     hidden: {},
-    visible: { transition: { staggerChildren: 0.11, delayChildren: 0.2 } },
+    visible: { transition: { staggerChildren: 0.07, delayChildren: 0.08 } },
   };
   // Revelado con máscara: la línea sube desde abajo dentro de un recorte.
   const line: Variants = {
     hidden: { y: reduce ? 0 : "115%" },
     visible: {
       y: 0,
-      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
     },
   };
   const fade: Variants = {
@@ -45,7 +47,7 @@ export function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
@@ -104,7 +106,7 @@ export function Hero() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative mx-auto w-full max-w-7xl px-5 pb-24 pt-32 sm:px-8 lg:px-10"
       >
-        <motion.div variants={container} initial="hidden" animate="visible" className="max-w-4xl">
+        <motion.div variants={container} initial={reduce ? "visible" : "hidden"} animate="visible" className="max-w-4xl">
           <motion.span
             variants={fade}
             className="eyebrow inline-flex items-center gap-3 text-guayaba-light"

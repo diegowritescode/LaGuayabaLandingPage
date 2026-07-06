@@ -40,6 +40,14 @@ export type MenuCategory = {
   /** Etiqueta en líneas para la tarjeta de la landing. */
   labelLines: string[];
   cover: string;
+  /** Slug para la ruta /menu/[slug] (URL amigable e indexable). */
+  slug: string;
+  /** Título SEO absoluto de la página de la categoría. */
+  metaTitle: string;
+  /** Meta description de la página de la categoría. */
+  metaDescription: string;
+  /** Frase introductoria (contexto para el usuario y para el SEO). */
+  intro?: string;
   subcategories: SubCategory[];
 };
 
@@ -49,6 +57,12 @@ export const menuData: MenuCategory[] = [
     label: "Comidas",
     labelLines: ["Comidas"],
     cover: images.menuCovers.comidas,
+    slug: "comidas",
+    metaTitle: "Comidas típicas colombianas en Medellín | La Guayaba",
+    metaDescription:
+      "Bandeja paisa, cazuela de frijoles, sancocho, parrilla al carbón, pescados y platos para compartir. La carta de comidas de La Guayaba en la Avenida Guayabal, Medellín.",
+    intro:
+      "Recetas antioqueñas y colombianas de siempre: desde la bandeja paisa y la cazuela de frijoles hasta la parrilla al carbón y los pescados del día.",
     subcategories: [
       {
         id: "para-compartir",
@@ -300,6 +314,12 @@ export const menuData: MenuCategory[] = [
     label: "Bebidas sin licor",
     labelLines: ["Bebidas", "sin licor"],
     cover: images.menuCovers.sinLicor,
+    slug: "bebidas-sin-licor",
+    metaTitle: "Bebidas sin licor: jugos naturales y limonadas | La Guayaba",
+    metaDescription:
+      "Jugos naturales de fruta, limonadas de la casa, sodas y refrescos para acompañar tu comida en La Guayaba, Medellín.",
+    intro:
+      "Jugos naturales de fruta, limonadas de la casa, sodas y refrescos para acompañar cada plato.",
     subcategories: [
       {
         id: "naturales",
@@ -390,6 +410,12 @@ export const menuData: MenuCategory[] = [
     label: "Bebidas con licor",
     labelLines: ["Bebidas", "con licor"],
     cover: images.menuCovers.conLicor,
+    slug: "bebidas-con-licor",
+    metaTitle: "Bar: cócteles, sangría, licores y cervezas | La Guayaba",
+    metaDescription:
+      "Cócteles de autor, sangría, refajos, vinos, licores y cervezas bien frías en el bar de La Guayaba, Avenida Guayabal, Medellín.",
+    intro:
+      "El bar de La Guayaba: sangría, refajos y vinos, cócteles de autor, licores y cervezas bien frías.",
     subcategories: [
       {
         id: "sangria-vinos",

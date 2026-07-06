@@ -6,6 +6,7 @@ import { MenuPreview } from "@/components/home/MenuPreview";
 import { Gallery } from "@/components/home/Gallery";
 import { EventsSection } from "@/components/home/EventsSection";
 import { Testimonials } from "@/components/home/Testimonials";
+import { Faq } from "@/components/home/Faq";
 import { CTAReservation } from "@/components/home/CTAReservation";
 import { LocationMap } from "@/components/home/LocationMap";
 import { RestaurantJsonLd } from "@/components/shared/JsonLd";
@@ -22,6 +23,7 @@ export default function HomePage() {
       <Gallery />
       <EventsSection />
       <Testimonials />
+      <Faq />
       <CTAReservation />
       <LocationMap />
     </>

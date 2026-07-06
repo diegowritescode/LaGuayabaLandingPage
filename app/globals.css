@@ -206,6 +206,20 @@
 }
 
 /* ------------------------------------------------------------
+   Acordeón de FAQ — <details>/<summary> nativo (accesible, sin JS).
+   Ocultamos el marcador por defecto y giramos el chevron al abrir.
+   ------------------------------------------------------------ */
+.faq summary {
+  list-style: none;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq details[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+/* ------------------------------------------------------------
    Grano de película — capa fija y sutil que da textura artesanal
    a todo el sitio (por encima del contenido, nunca bloquea clics).
    ------------------------------------------------------------ */

@@ -100,23 +100,33 @@ No hay que tocar ningún componente: todos leen las imágenes desde `lib/images.
 
 ## 🔎 SEO y accesibilidad
 
-- Metadata completa + Open Graph + Twitter Cards (imagen OG generada dinámicamente).
-- `robots.txt` y `sitemap.xml` automáticos, `manifest.webmanifest` y favicon.
-- Datos estructurados `schema.org/Restaurant` (JSON-LD).
-- HTML semántico, foco visible, textos alternativos, buen contraste y respeto a
-  `prefers-reduced-motion`.
+- Metadata por página con helper central (`lib/seo.ts` → `buildMetadata`):
+  titles, descriptions, canonical, Open Graph y Twitter Cards (imagen OG dinámica).
+- `robots.txt` y `sitemap.xml` automáticos (data-driven), `manifest.webmanifest` y favicon.
+- **Datos estructurados** (JSON-LD) consolidados en un `@graph`:
+  `Restaurant` (LocalBusiness) + `WebSite` en el inicio, `Menu` y `BreadcrumbList`
+  en la carta, `BreadcrumbList` por categoría y `FAQPage` en el inicio.
+- **Carta indexable:** cada categoría es una ruta real y estática
+  (`/menu/comidas`, `/menu/bebidas-sin-licor`, `/menu/bebidas-con-licor`) con su
+  propio título y descripción; los platos se renderizan en el HTML (SSG).
+- HTML semántico, un solo `h1` por página, foco visible, textos alternativos,
+  buen contraste, skip-link y respeto a `prefers-reduced-motion`.
 
-> Antes de publicar, cambia `siteConfig.url` en `lib/site-config.ts` por tu
-> dominio real (afecta canonical, sitemap y OpenGraph).
+### 🌐 Antes de publicar
+
+- **Dominio:** define `NEXT_PUBLIC_SITE_URL` en tu hosting (Vercel, etc.). Es la
+  base de canonical, sitemap y Open Graph. El fallback local es `https://laguayaba.com`.
 
 ---
 
-## 📌 Pendiente de datos
+## 📌 Pendiente de datos (todo lo demás ya está preparado)
 
-- **Horario:** el footer y la sección de contacto ya tienen el espacio listo
-  ("Consulta horarios por WhatsApp"). Cuando lo tengas, actualízalo en
-  `components/layout/Footer.tsx`.
-- **Fotos reales** del restaurante (ver arriba).
+| Dato | Dónde completarlo |
+| --- | --- |
+| **Horario** | `siteConfig.openingHours` en `lib/site-config.ts` — al llenarlo se emite `openingHoursSpecification` en el schema automáticamente (y actualiza el texto del footer). |
+| **Coordenadas GPS** | `siteConfig.geo` en `lib/site-config.ts` — actualmente son **aproximadas**; confírmalas con el pin de tu Google Business Profile. |
+| **Fotos reales** | `lib/images.ts` (ver arriba). |
+| **Redes sociales adicionales** | `contact` / `sameAs` en `lib/site-config.ts`. |
 
 ---
 

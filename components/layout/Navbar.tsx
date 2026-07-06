@@ -19,7 +19,7 @@ export function Navbar() {
   // Solo estas rutas tienen una foto oscura a pantalla completa arriba, donde
   // el navbar puede ir transparente con texto claro. En el resto (404, futuras
   // páginas claras) el navbar va siempre sólido para mantener el contraste.
-  const overDarkHero = pathname === "/" || pathname === "/menu";
+  const overDarkHero = pathname === "/" || pathname.startsWith("/menu");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);

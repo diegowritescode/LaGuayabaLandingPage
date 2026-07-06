@@ -152,6 +152,53 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
+/**
+ * Preguntas frecuentes (sección FAQ + FAQPage schema).
+ * Respuestas reales y verificables; sin promesas que no podamos cumplir.
+ */
+export const faqs = [
+  {
+    question: "¿Dónde está ubicado La Guayaba?",
+    answer:
+      "Estamos en la Carrera 52 #18-05, sobre la Avenida Guayabal, en Medellín (Antioquia, Colombia).",
+  },
+  {
+    question: "¿Cuál es el horario de atención?",
+    answer:
+      "Abrimos todos los días, incluidos festivos, de 8:00 a.m. a 8:00 p.m.",
+  },
+  {
+    question: "¿Qué tipo de comida ofrecen?",
+    answer:
+      "Cocina típica antioqueña y colombiana: bandeja paisa, cazuela de frijoles, sancocho, ajiaco, parrilla al carbón, pescados y platos para compartir, además de postres caseros.",
+  },
+  {
+    question: "¿Hacen eventos y celebraciones?",
+    answer:
+      "Sí. Organizamos matrimonios, cumpleaños, aniversarios, grados y eventos empresariales, con decoración, sonido, meseros, bar y arreglos florales. Escríbenos por WhatsApp para cotizar.",
+  },
+  {
+    question: "¿Necesito reservar?",
+    answer:
+      "Recomendamos reservar por WhatsApp, sobre todo los fines de semana y para grupos grandes, para garantizar tu mesa.",
+  },
+  {
+    question: "¿Tienen servicio a domicilio?",
+    answer:
+      "Sí, puedes hacer tu pedido a domicilio escribiéndonos por WhatsApp.",
+  },
+  {
+    question: "¿Hay opciones vegetarianas?",
+    answer:
+      "Sí. En la carta encontrarás platos vegetarianos, como la bandeja vegetariana y varias entradas para compartir.",
+  },
+  {
+    question: "¿Desde cuándo existe La Guayaba?",
+    answer:
+      "Abrimos en 1999. Somos un restaurante familiar con más de 25 años preservando la tradición de la comida colombiana.",
+  },
+] as const;
+
 /** Vista previa de categorías destacadas en el inicio (MenuPreview). */
 export const menuPreviewCategories = [
   {

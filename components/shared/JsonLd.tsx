@@ -1,42 +1,22 @@
-import { siteConfig, contact, links } from "@/lib/site-config";
+import { restaurantGraph } from "@/lib/seo";
 
 /**
- * Datos estructurados (schema.org/Restaurant) para mejorar el SEO y la
- * aparición en resultados enriquecidos de Google.
+ * Renderiza cualquier objeto de datos estructurados (schema.org) como JSON-LD.
+ * El contenido es estático y controlado por nosotros.
  */
-export function RestaurantJsonLd() {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    name: siteConfig.legalName,
-    description: siteConfig.description,
-    slogan: siteConfig.tagline,
-    url: siteConfig.url,
-    telephone: `+${contact.phoneIntl}`,
-    email: contact.email,
-    servesCuisine: ["Colombiana", "Antioqueña", "Parrilla", "Pescados"],
-    priceRange: "$$",
-    foundingDate: String(siteConfig.founded),
-    founder: siteConfig.founders.map((name) => ({
-      "@type": "Person",
-      name,
-    })),
-    image: `${siteConfig.url}${siteConfig.ogImage}`,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: `${contact.address.line1}, ${contact.address.line2}`,
-      addressLocality: "Medellín",
-      addressCountry: "CO",
-    },
-    sameAs: [contact.instagramUrl],
-    acceptsReservations: links.whatsappReservation,
-  };
-
+export function JsonLd({ data }: { data: object }) {
   return (
     <script
       type="application/ld+json"
-      // El contenido es estático y controlado por nosotros.
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
   );
+}
+
+/**
+ * Ficha del negocio local (Restaurant) + WebSite, enlazados por @id.
+ * Se coloca una sola vez, en la página de inicio.
+ */
+export function RestaurantJsonLd() {
+  return <JsonLd data={restaurantGraph()} />;
 }

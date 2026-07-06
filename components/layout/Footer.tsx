@@ -116,10 +116,8 @@ export function Footer() {
             <div className="mt-5 flex items-start gap-3 text-sm text-cream/75">
               <Clock className="mt-0.5 h-5 w-5 shrink-0 text-guayaba" />
               <div>
-                <p className="text-cream/90">Todos los días</p>
-                <p className="mt-1 text-cream/60">
-                  Consulta horarios por WhatsApp
-                </p>
+                <p className="text-cream/90">Todos los días y festivos</p>
+                <p className="mt-1 text-cream/60">8:00 a.m. – 8:00 p.m.</p>
               </div>
             </div>
           </div>
