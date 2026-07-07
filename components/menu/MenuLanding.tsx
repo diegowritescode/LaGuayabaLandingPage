@@ -103,7 +103,17 @@ export function MenuLanding() {
           ))}
         </nav>
 
-        <div className="mt-12 flex items-center gap-4">
+        <a
+          href={links.whatsappOrder}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-10 inline-flex items-center gap-2.5 rounded-full bg-guayaba px-6 py-3 text-sm font-semibold text-brown shadow-[0_14px_34px_-12px_rgba(231,154,156,0.75)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-guayaba-dark"
+        >
+          <WhatsAppIcon className="h-5 w-5" />
+          Pedir a domicilio
+        </a>
+
+        <div className="mt-6 flex items-center gap-4">
           <a
             href={links.instagram}
             target="_blank"

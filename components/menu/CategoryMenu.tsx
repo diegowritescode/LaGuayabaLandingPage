@@ -7,9 +7,11 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Search, X, Star, Leaf, SearchX } from "lucide-react";
 import type { MenuCategory, Dish, MenuPrice } from "@/lib/menu";
 import { cop } from "@/lib/menu";
+import { links } from "@/lib/site-config";
 import { cn, normalizeText } from "@/lib/utils";
 import { LeafMark } from "@/components/ui/LeafMark";
 import { GardenDecor, PalmFrond } from "@/components/ui/Botanical";
+import { WhatsAppIcon } from "@/components/shared/icons";
 
 export function CategoryMenu({ category }: { category: MenuCategory }) {
   const [query, setQuery] = useState("");
@@ -111,6 +113,15 @@ export function CategoryMenu({ category }: { category: MenuCategory }) {
               <Leaf className="h-3.5 w-3.5 text-leaf" /> Vegetariano
             </span>
           </div>
+          <a
+            href={links.whatsappOrder}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-guayaba px-5 py-2.5 text-sm font-semibold text-brown shadow-[0_12px_30px_-12px_rgba(231,154,156,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-guayaba-dark"
+          >
+            <WhatsAppIcon className="h-4 w-4" />
+            Pedir a domicilio
+          </a>
         </div>
       </header>
 

@@ -74,21 +74,40 @@ export const contact = {
   instagramUrl: "https://instagram.com/laguayaba_re",
 } as const;
 
+/**
+ * Plantillas de mensajes de WhatsApp = "contrato" con el bot.
+ *
+ * Cada texto empieza con una frase de INTENCIÓN clara (reservar / pedido a
+ * domicilio / cotizar un evento). El bot puede detectar esa frase por palabra
+ * clave y enrutar la conversación al flujo correcto; para el resto ("hola",
+ * dudas de precios/ubicación) el bot debería responder con su menú de opciones.
+ * Mantén estas frases sincronizadas con las keywords configuradas en el bot.
+ */
+export const whatsappTemplates = {
+  // El mensaje "general" (el que se conserva) — botón flotante y contacto.
+  general: "¡Hola! Me gustaría reservar una mesa en La Guayaba.",
+  reservation:
+    "¡Hola! Quiero reservar una mesa en La Guayaba. ¿Me ayudan con la disponibilidad?",
+  order: "¡Hola! 🛵 Quiero hacer un pedido a domicilio en La Guayaba.",
+  events:
+    "¡Hola! Quiero cotizar un evento en La Guayaba. Les cuento los detalles:",
+} as const;
+
 const whatsappBase = `https://wa.me/${contact.phoneIntl}`;
 
+/**
+ * Construye un enlace de WhatsApp (wa.me) con un texto pre-escrito.
+ * Reutilizable para mensajes dinámicos (p. ej. un pedido armado desde la carta).
+ */
+export function waLink(message: string): string {
+  return `${whatsappBase}?text=${encodeURIComponent(message)}`;
+}
+
 export const links = {
-  whatsapp: `${whatsappBase}?text=${encodeURIComponent(
-    "¡Hola! Me gustaría reservar una mesa en La Guayaba."
-  )}`,
-  whatsappReservation: `${whatsappBase}?text=${encodeURIComponent(
-    "¡Hola! Quiero reservar una mesa en La Guayaba. ¿Me ayudan con la disponibilidad?"
-  )}`,
-  whatsappEvents: `${whatsappBase}?text=${encodeURIComponent(
-    "¡Hola! Quiero cotizar un evento en La Guayaba. Les cuento los detalles:"
-  )}`,
-  whatsappOrder: `${whatsappBase}?text=${encodeURIComponent(
-    "¡Hola! Quiero hacer un pedido a domicilio en La Guayaba."
-  )}`,
+  whatsapp: waLink(whatsappTemplates.general),
+  whatsappReservation: waLink(whatsappTemplates.reservation),
+  whatsappEvents: waLink(whatsappTemplates.events),
+  whatsappOrder: waLink(whatsappTemplates.order),
   phone: `tel:+${contact.phoneIntl}`,
   email: `mailto:${contact.email}`,
   instagram: contact.instagramUrl,
